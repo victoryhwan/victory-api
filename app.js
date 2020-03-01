@@ -1,13 +1,24 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const http = require('http')
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const http = require('http');
 var cors = require('cors');
+var path = require('path');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 
 app.set('port', process.env.PORT || 3031);
 
 // app.listen(port, ()=> winston.info(`Listening on port ${port}...`));
+// app.use(logger('dev'));
+app.use(express.json({limit:'50mb'}));
+app.use(express.urlencoded({ extended: false, limit:'50mb' }));
+// app.use(cookieParser());
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json({limit: '200mb'}));
+app.use(bodyParser.urlencoded({extended: true, limit: '200mb'}));
+app.use(bodyParser.text({limit: '200mb' }));
 
 http.createServer(app).listen(app.get('port'), function(){
 //   winston.info(`Listening on port ${app.get('port')}...`)

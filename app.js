@@ -37,7 +37,8 @@ app.use(allowCORS);
 app.use(cors())
 app.set('trust proxy', 1) // trust first proxy
 
-app.get('/', (req, res) => res.send('Hello World! zzzzdddd'))
+app.get('/', (req, res) => res.send('Hello World!'))
 app.use('/api/member', require('./routes/api/member/member'));
+app.use('/auth', require('./routes/api/auth/auth'));
 
 

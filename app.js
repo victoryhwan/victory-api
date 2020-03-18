@@ -5,8 +5,9 @@ const http = require('http');
 var cors = require('cors');
 var path = require('path');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-
+// var cookieParser = require('cookie-parser');
+const formData = require("express-form-data");
+const os = require("os");
 
 app.set('port', process.env.PORT || 3031);
 
@@ -37,8 +38,14 @@ app.use(allowCORS);
 app.use(cors())
 app.set('trust proxy', 1) // trust first proxy
 
-app.get('/', (req, res) => res.send('Hello World!'))
+const options = {
+  uploadDir: os.tmpdir()
+};
+
+app.use(formData.parse(options));
+
+app.get('/', (req, res) => res.send('Welcome to VicFactory'))
 app.use('/api/member', require('./routes/api/member/member'));
 app.use('/auth', require('./routes/api/auth/auth'));
-
+app.use('/admin', require('./routes/api/admin/admin'));
 

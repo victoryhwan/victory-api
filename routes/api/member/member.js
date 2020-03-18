@@ -5,7 +5,11 @@ var router      = express.Router();
 var async       = require('async');
 // const winston   = require('../../config/winston');
 
-router.get('/getMemberList', async function (req, res) {
+router.get('/getMemberList', function(req, res){
+    getMemberList(req, res);
+});
+
+async function getMemberList(req, res){
     try{
         var rs = await selectMemberList();
         res.json({
@@ -20,7 +24,7 @@ router.get('/getMemberList', async function (req, res) {
             message:'Server Error'
         });
     }
-});
+}
 
 router.put('/insertMember', async function (req, res) {
     try{

@@ -7,7 +7,7 @@ var async = require("async");
 var SERVER_ERR_MSG = "Server Error";
 const _member = require("./mng/common");
 
-/* dfdfdff */
+/* dddd */
 
 /* 로그인 */
 router.post("/login", async (req, res) => {

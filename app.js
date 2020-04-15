@@ -1,42 +1,45 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const http = require('http');
-var cors = require('cors');
-var path = require('path');
-var bodyParser = require('body-parser');
+const http = require("http");
+var cors = require("cors");
+var path = require("path");
+var bodyParser = require("body-parser");
 // var cookieParser = require('cookie-parser');
 const formData = require("express-form-data");
 const os = require("os");
 
-app.set('port', process.env.PORT || 3031);
+app.set("port", process.env.PORT || 3031);
 
 // app.listen(port, ()=> winston.info(`Listening on port ${port}...`));
 // app.use(logger('dev'));
-app.use(express.json({limit:'50mb'}));
-app.use(express.urlencoded({ extended: false, limit:'50mb' }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 // app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json({limit: '200mb'}));
-app.use(bodyParser.urlencoded({extended: true, limit: '200mb'}));
-app.use(bodyParser.text({limit: '200mb' }));
+app.use(bodyParser.json({ limit: "200mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "200mb" }));
+app.use(bodyParser.text({ limit: "200mb" }));
 
-http.createServer(app).listen(app.get('port'), function(){
-//   winston.info(`Listening on port ${app.get('port')}...`)
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(app.get("port"), function() {
+  //   winston.info(`Listening on port ${app.get('port')}...`)
+  console.log("Express server listening on port " + app.get("port"));
 });
 
 var allowCORS = function(req, res, next) {
-  res.header('Acess-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, Accecpt, Content-Type, Access-Control-Allow-Origin, Authorization, X-Requested-With, Access-Control-Request-Method, Access-Control-Request-Headers');
-  res.header('Access-Control-Allow-Credentials', true);
+  res.header("Acess-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, Accecpt, Content-Type, Access-Control-Allow-Origin, Authorization, X-Requested-With, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 };
 
 app.use(allowCORS);
-app.use(cors())
-app.set('trust proxy', 1) // trust first proxy
+app.use(cors());
+app.set("trust proxy", 1); // trust first proxy
 
 const options = {
   uploadDir: os.tmpdir()
@@ -44,8 +47,8 @@ const options = {
 
 app.use(formData.parse(options));
 
-app.get('/', (req, res) => res.send('Welcome to VicFactory'))
-app.use('/api/member', require('./routes/api/member/member'));
-app.use('/auth', require('./routes/api/auth/auth'));
-app.use('/admin', require('./routes/api/admin/admin'));
-
+app.get("/", (req, res) => res.send("Welcome to VicFactory"));
+app.use("/api/member", require("./routes/api/member/index"));
+app.use("/api/cart", require("./routes/api/cart/index"));
+app.use("/auth", require("./routes/api/auth/auth"));
+app.use("/admin", require("./routes/api/admin/admin"));

@@ -4,7 +4,7 @@ echo "*********** Copy Test Env To Env *********** "
 cp .env_test .env
 cat .env
 echo "*********** Show Current Branch *********** "
-git branch
+# git branch
 
 echo "*********** Show EB List *********** "
 eb use VictoryApi-env

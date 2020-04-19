@@ -47,8 +47,9 @@ const options = {
 app.use(function(req, res, next) {
   if (process.env.API_KEY != req.headers.api_key) {
     res.json({
-      code: 401,
-      message: "API Key Auth Fail"
+      code: 410,
+      message: "API Key Auth Fail",
+      data: `${process.env.API_KEY}, ${req.headers.api_key}`
     });
   } else {
     next();

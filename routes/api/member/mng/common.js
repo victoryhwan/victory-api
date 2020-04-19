@@ -8,13 +8,13 @@ var SERVER_ERR_MSG = "Server Error";
 
 router.selectMemberList = async () => {
   return new Promise((resolve, reject) => {
-    var sql = `SELECT tm.id
-                      , tm.pw
-                      , DATE_FORMAT(tm.reg_date, '%Y-%c-%e %H:%i:%s') AS reg_date
-                      , DATE_FORMAT(tm.update_date, '%Y-%c-%e %H:%i:%s') AS update_date
-                      FROM tmember tm 
-                  WHERE 1=1 
-                  LIMIT 5`;
+    var sql = `SELECT tm.idx
+                    , tm.id
+                    , tm.pw
+                    , DATE_FORMAT(tm.reg_date, '%Y-%c-%e %H:%i:%s') AS reg_date
+                    , DATE_FORMAT(tm.update_date, '%Y-%c-%e %H:%i:%s') AS update_date
+                 FROM tmember tm 
+                WHERE 1=1`;
     connection.query(sql, [], (err, result) => {
       if (err) {
         return resolve({ code: 500, message: SERVER_ERR_MSG });

@@ -44,11 +44,21 @@ app.set("trust proxy", 1); // trust first proxy
 const options = {
   uploadDir: os.tmpdir()
 };
+app.use(function(req, res, next) {
+  if (process.env.API_KEY != req.headers.api_key) {
+    res.json({
+      code: 401,
+      message: "API Key Auth Fail"
+    });
+  } else {
+    next();
+  }
+});
 
 app.use(formData.parse(options));
 
 app.get("/", (req, res) => res.send("Welcome to VicFactory"));
-app.use("/api/member", require("./routes/api/member/index"));
-app.use("/api/cart", require("./routes/api/cart/index"));
+app.use("/api/member", require("./routes/api/member/controller"));
+app.use("/api/cart", require("./routes/api/cart/controller"));
 app.use("/auth", require("./routes/api/auth/auth"));
 app.use("/admin", require("./routes/api/admin/admin"));

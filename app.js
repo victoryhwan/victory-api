@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const http = require("http");
+const HTTP = require("http");
+const HTTPS = require("https");
 var cors = require("cors");
 var path = require("path");
 var bodyParser = require("body-parser");
@@ -21,7 +22,7 @@ app.use(bodyParser.json({ limit: "200mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "200mb" }));
 app.use(bodyParser.text({ limit: "200mb" }));
 
-http.createServer(app).listen(app.get("port"), function() {
+HTTP.createServer(app).listen(app.get("port"), function() {
   //   winston.info(`Listening on port ${app.get('port')}...`)
   console.log("Express server listening on port " + app.get("port"));
 });

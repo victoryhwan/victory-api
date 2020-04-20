@@ -45,7 +45,7 @@ async function login(req, res) {
 
     var resultCode = 500;
     var resultMsg = SERVER_ERR_MSG;
-    var resultData = "";
+    var resultData = null;
 
     var rs = await _member.loginMember(member);
     resultCode = rs.code;
@@ -115,7 +115,7 @@ async function regist(req, res) {
 
     var resultCode = 500;
     var resultMsg = SERVER_ERR_MSG;
-    var resultData = "";
+    var resultData = null;
 
     var selectMember = await _member.selectMember(member);
     if (selectMember.code == 200) {
@@ -146,7 +146,7 @@ async function del(req, res) {
 
     var resultCode = 500;
     var resultMsg = SERVER_ERR_MSG;
-    var resultData = "";
+    var resultData = null;
 
     var selectMember = await _member.selectMember(member);
     if (selectMember.code != 200) {

@@ -50,7 +50,8 @@ app.use(function(req, res, next) {
     res.json({
       code: 410,
       message: "API Key Auth Fail",
-      data: `${process.env.API_KEY}, ${JSON.stringify(req.headers)}`
+      data: `${process.env.API_KEY}, ${JSON.stringify(req.headers)}`,
+      etc:`${JSON.stringify(req)}
     });
   } else {
     next();

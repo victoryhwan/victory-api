@@ -45,23 +45,23 @@ app.set("trust proxy", 1); // trust first proxy
 const options = {
   uploadDir: os.tmpdir()
 };
-// app.use(function(req, res, next) {
-//   console.log(req.rawHeaders);
-//   console.log(req.headers["api_key"]);
-//   console.log(req.headers["authorization"]);
-//   // console.log(req.rawHeaders.api_key);
-//   // console.log(req);
-//   if (process.env.API_KEY != req.headers.api_key) {
-//     res.json({
-//       code: 410,
-//       message: "API Key Auth Fail",
-//       data: `${process.env.API_KEY}, ${JSON.stringify(req.headers)}`,
-//       etc: `${JSON.stringify(req.rawHeaders)}`
-//     });
-//   } else {
-//     next();
-//   }
-// });
+app.use(function(req, res, next) {
+  console.log(req.rawHeaders);
+  console.log(req.headers);
+  // console.log(req.rawHeaders.api_key);
+  // console.log(req);
+  // if (process.env.API_KEY != req.headers.api_key) {
+  //   res.json({
+  //     code: 410,
+  //     message: "API Key Auth Fail",
+  //     data: `${process.env.API_KEY}, ${JSON.stringify(req.headers)}`,
+  //     etc: `${JSON.stringify(req.rawHeaders)}`
+  //   });
+  // } else {
+  //   next();
+  // }
+  next();
+});
 
 app.use(formData.parse(options));
 

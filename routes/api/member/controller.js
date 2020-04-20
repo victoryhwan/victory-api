@@ -63,9 +63,7 @@ async function login(req, res) {
     res.json({
       code: resultCode,
       message: resultMsg,
-      data: resultData,
-
-      info: `${JSON.stringify(req.headers)}`
+      data: resultData
     });
   }
 }
